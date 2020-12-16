@@ -33,6 +33,10 @@ Route::get('/contact',[ContactController::class,'index'])->name('con');
 //Category controller
 Route::get('/category/all',[CategoryController::class,'AllCat'])->name('all.category');
 
+Route::get('/category/edit/{id}',[CategoryController::class,'edit']);
+Route::post('/category/update/{id}',[CategoryController::class,'update']);
+
+
 Route::post('/category/add',[CategoryController::class,'AddCat'])->name('store.category');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -44,3 +48,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
     return view('dashboard',compact('users'));
 })->name('dashboard');
+
+
