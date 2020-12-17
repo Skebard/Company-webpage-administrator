@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+
+    public function __construct(){
+        //check if user is logged in or not
+        $this->middleware('auth');
+    }
+
     public function AllCat(){
         //Eloquent
         //data ordered chronologically starting by the last

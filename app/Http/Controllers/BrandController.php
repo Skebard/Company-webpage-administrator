@@ -13,6 +13,10 @@ use Image;
 class BrandController extends Controller
 {
     //
+    public function __construct(){
+        //check if user is logged in or not
+        $this->middleware('auth');
+    }
 
     public function allBrand()
     {
