@@ -72,9 +72,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     // $users = User::all();
 
     //Query builder
-    $users = DB::table('users')->get();
+    // $users = DB::table('users')->get();
 
-    return view('dashboard',compact('users'));
+    //return view('dashboard',compact('users'));
+    return view('admin.index');
+
 })->name('dashboard');
 
 
