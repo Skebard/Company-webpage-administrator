@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Multipic;
 use Illuminate\Support\Carbon;
+use Auth;
 
 use Image;
 
@@ -13,7 +14,8 @@ use Image;
 class BrandController extends Controller
 {
     //
-    public function __construct(){
+    public function __construct()
+    {
         //check if user is logged in or not
         $this->middleware('auth');
     }
@@ -45,12 +47,12 @@ class BrandController extends Controller
         // $up_location = 'image/brand/';
         // $last_img = $up_location . $img_name;
         // $brand_image->move($up_location, $img_name);
-        
+
         // Using intervention image
-        $name_gen = hexdec(uniqid()).'.'.$brand_image->getClientOriginalExtension();
-        Image::make($brand_image)->resize(300,200)->save('image/brand/'.$name_gen);
-        $last_img = 'image/brand/'.$name_gen;
-        
+        $name_gen = hexdec(uniqid()) . '.' . $brand_image->getClientOriginalExtension();
+        Image::make($brand_image)->resize(300, 200)->save('image/brand/' . $name_gen);
+        $last_img = 'image/brand/' . $name_gen;
+
         Brand::insert([
             'brand_name' => $request->brand_name,
             'brand_image' => $last_img,
@@ -63,11 +65,12 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::find($id);
-        return view('admin.brand.edit',compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
-    public function update(Request $request ,$id){
-        
+    public function update(Request $request, $id)
+    {
+
         $validateData = $request->validate(
             [
                 'brand_name' => 'required|min:4',
@@ -79,10 +82,10 @@ class BrandController extends Controller
         );
 
         $old_image = $request->old_image;
-        
+
         $brand_image = $request->file('brand_image');
-        
-        if($brand_image){
+
+        if ($brand_image) {
             $name_gen = hexdec(uniqid());
             $img_ext = strtolower($brand_image->getClientOriginalExtension());
             $img_name = $name_gen . '.' . $img_ext;
@@ -95,7 +98,7 @@ class BrandController extends Controller
                 'brand_image' => $last_img,
                 'updated_at' => Carbon::now()
             ]);
-        }else{
+        } else {
             Brand::find($id)->update([
                 'brand_name' => $request->brand_name,
                 'updated_at' => Carbon::now()
@@ -106,7 +109,8 @@ class BrandController extends Controller
         return Redirect()->back()->with('success', 'Brand Updated Successfully');
     }
 
-    public function  delete($id){
+    public function  delete($id)
+    {
         //Delete image from the system
         $brand = Brand::find($id);
         $old_image = $brand->brand_image;
@@ -115,26 +119,27 @@ class BrandController extends Controller
         //Delete brand from the DB
         Brand::find($id)->delete();
         return Redirect()->back()->with('success', 'Brand Deleted Successfully');
-
     }
 
 
     //For multi Image methods
 
-    public function multipic(){
+    public function multipic()
+    {
         $images = Multipic::all();
-        return view('admin.multipic.index',compact('images'));
+        return view('admin.multipic.index', compact('images'));
     }
 
 
-    public function storeImg(Request $request){
-        
+    public function storeImg(Request $request)
+    {
+
         $images = $request->file('image');
-        foreach($images as $image){
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(300,200)->save('image/multi/'.$name_gen);
-            $last_img = 'image/multi/'.$name_gen;
-            
+        foreach ($images as $image) {
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 200)->save('image/multi/' . $name_gen);
+            $last_img = 'image/multi/' . $name_gen;
+
             Multipic::insert([
                 'image' => $last_img,
                 'created_at' => Carbon::now()
@@ -142,6 +147,13 @@ class BrandController extends Controller
         }
 
         return Redirect()->back()->with('success', 'Brand Deleted Successfully');
-
     }
+
+    
+    public function logout(){
+        Auth::logout();
+        return Redirect()->route('login')->with('success','User logout');
+    }
+    
+
 }
