@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\HomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -67,6 +68,14 @@ Route::get('/multi/image',[BrandController::class,'multipic'])->name('multi.imag
 Route::post('/multi/add',[BrandController::class,'storeImg'])->name('store.image');
 
 
+// Admin all route
+
+Route::get('/home/slider',[HomeController::class,'homeSlider'])->name('home.slider');
+Route::get('/add/slider',[HomeController::class,'addSlider'])->name('add.slider');
+Route::post('/store/slider',[HomeController::class,'storeSlider'])->name('store.slider');
+Route::get('/slider/delete/{id}',[HomeController::class,'deleteSlider']);
+Route::get('/slider/edit/{id}',[HomeController::class,'editSlider']);
+Route::post('/slider/update/{id}',[HomeController::class,'updateSlider']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
