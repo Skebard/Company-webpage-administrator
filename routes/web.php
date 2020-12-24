@@ -85,7 +85,7 @@ Route::get('/add/About',[AboutController::class,'addAbout'])->name('add.about');
 Route::post('/store/About',[AboutController::class,'storeAbout'])->name('store.about');
 Route::get('/about/edit/{id}',[AboutController::class,'editAbout']);
 Route::post('/about/update/{id}',[AboutController::class,'updateAbout']);
-
+Route::get('/about/delete/{id}',[AboutController::class,'deleteAbout']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
