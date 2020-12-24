@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -76,6 +77,15 @@ Route::post('/store/slider',[HomeController::class,'storeSlider'])->name('store.
 Route::get('/slider/delete/{id}',[HomeController::class,'deleteSlider']);
 Route::get('/slider/edit/{id}',[HomeController::class,'editSlider']);
 Route::post('/slider/update/{id}',[HomeController::class,'updateSlider']);
+
+
+// Home About All Route
+Route::get('/home/About',[AboutController::class,'homeAbout'])->name('home.about');
+Route::get('/add/About',[AboutController::class,'addAbout'])->name('add.about');
+Route::post('/store/About',[AboutController::class,'storeAbout'])->name('store.about');
+Route::get('/about/edit/{id}',[AboutController::class,'editAbout']);
+Route::post('/about/update/{id}',[AboutController::class,'updateAbout']);
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
