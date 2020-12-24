@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ServiceController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,8 @@ Route::get('/email/verify', function () {
 
 Route::get('/', function () {
     $brands = DB::table('brands')->get();
-    return view('home',compact('brands'));
+    $abouts = DB::table('home_abouts')->first();
+    return view('home',compact('brands','abouts'));
 });
 Route::get('/home', function () {
     echo 'This is Home page';
@@ -86,6 +88,11 @@ Route::post('/store/About',[AboutController::class,'storeAbout'])->name('store.a
 Route::get('/about/edit/{id}',[AboutController::class,'editAbout']);
 Route::post('/about/update/{id}',[AboutController::class,'updateAbout']);
 Route::get('/about/delete/{id}',[AboutController::class,'deleteAbout']);
+
+//Services
+
+Route::resource('services',ServiceController::class);
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
