@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -124,6 +125,9 @@ Route::get('/contact',[ContactController::class,'contact'])->name('contact');
 Route::post('/contact/form',[ContactController::class,'contactForm'])->name('contact.form');
 
 
+//Change password and user profile Route
+Route::get('/user/password',[ProfileController::class,'changePassword'])->name('change.password');
+Route::post('/user/password/update',[ProfileController::class,'updatePassword'])->name('update.password');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
