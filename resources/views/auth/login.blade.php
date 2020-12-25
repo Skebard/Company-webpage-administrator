@@ -56,13 +56,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
+                @if (count($errors) > 0)
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ $errors->all()[0] }}
 
-                    @if(session('hi'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('hi') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    @endif
+                @endif
+
                     <div class="card-header bg-primary">
                         <div class="app-brand">
                             <a href="/index.html">
@@ -72,7 +73,7 @@
                                         <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
                                     </g>
                                 </svg>
-                                <span class="brand-name">My Dashboard</span>
+                                <span class="brand-name">My Dashboardd</span>
                             </a>
                         </div>
                     </div>
