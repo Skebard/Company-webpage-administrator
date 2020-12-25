@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\ContactForm;
+
 use Illuminate\Support\Carbon;
 
 class ContactController extends Controller
@@ -67,5 +69,46 @@ class ContactController extends Controller
         Contact::find($id)->delete();
         return Redirect()->back()->with('success','Contact Deleted Successfully');
         
+    }
+
+    public function contact(){
+        $contact = Contact::first();
+        return view('pages.contact',compact('contact'));
+    }
+
+    public function contactForm(Request $request){
+        $validateData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ],
+        [
+            'name.required' => 'Please fill this field',
+            'email.required' => 'Please fill this field',
+            'subject.required' => 'Please fill this field',
+            'message.required' => 'Please fill this field',  
+        ]
+    );
+
+        ContactForm::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'created_at' => Carbon::now(),
+        ]);
+
+        return Redirect()->route('contact')->with('success','Your message has been send successfully');
+    }
+
+    public function adminMessage(){
+        $messages = ContactForm::all();
+        return view('admin.contact.message',compact('messages'));
+    }
+
+    public function deleteMessage($id){
+        ContactForm::find($id)->delete();
+        return Redirect()->back()->with('success','Message Deleted successfully');
     }
 }

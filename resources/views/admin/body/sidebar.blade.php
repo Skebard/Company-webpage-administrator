@@ -97,7 +97,7 @@
 
 
                             <li class="active">
-                                <a class="sidenav-item-link" href="{{route('admin.contact')}}">
+                                <a class="sidenav-item-link" href="{{route('admin.message')}}">
                                     <span class="nav-text">Contact Message</span>
 
                                 </a>
