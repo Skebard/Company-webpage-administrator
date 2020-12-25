@@ -7,6 +7,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PortfolioController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +30,9 @@ Route::get('/email/verify', function () {
 Route::get('/', function () {
     $brands = DB::table('brands')->get();
     $abouts = DB::table('home_abouts')->first();
-    return view('home',compact('brands','abouts'));
+    $services = DB::table('services')->get();
+    $pics =DB::table('multipics')->get();
+    return view('home',compact('brands','abouts','services','pics'));
 });
 Route::get('/home', function () {
     echo 'This is Home page';
@@ -88,6 +91,12 @@ Route::post('/store/About',[AboutController::class,'storeAbout'])->name('store.a
 Route::get('/about/edit/{id}',[AboutController::class,'editAbout']);
 Route::post('/about/update/{id}',[AboutController::class,'updateAbout']);
 Route::get('/about/delete/{id}',[AboutController::class,'deleteAbout']);
+
+
+//Portfolio pages Route
+Route::resource('portfolio',PortfolioController::class);
+
+
 
 //Services
 
