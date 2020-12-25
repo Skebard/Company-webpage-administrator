@@ -103,6 +103,13 @@ Route::resource('portfolio',PortfolioController::class);
 Route::resource('services',ServiceController::class);
 
 
+// Admin Contact Page Route
+
+Route::get('/admin/contact',[ContactController::class,'adminContact'])->name('admin.contact');
+Route::get('/admin/add/contact',[ContactController::class,'addContact'])->name('add.contact');
+Route::post('/admin/store/contact',[ContactController::class,'storeContact'])->name('store.contact');
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
     // $users = User::all();
