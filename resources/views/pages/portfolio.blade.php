@@ -43,7 +43,7 @@
                         <a href="{{ $image->image}}" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
                     </div>
                 </div>
-            @endforeach;
+            @endforeach
 
 
 
