@@ -57,7 +57,7 @@
                             </td>
                                       </td>
                                     <td>
-                                    <a href="{{url('about/edit/'.$contact->id)}}" class='btn btn-info'>Edit</a>
+                                    <a href="{{url('admin/contact/edit/'.$contact->id)}}" class='btn btn-info'>Edit</a>
                                     <a href="{{url('admin/contact/delete/'.$contact->id)}}" onclick='return confirm("Are you sure to delete?")' class='btn btn-danger'>Delete</a>
                                     </td>
                                 </tr>

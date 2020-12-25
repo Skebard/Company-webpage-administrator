@@ -50,10 +50,18 @@ class ContactController extends Controller
 
 
     public function editContact($id){
+        $contact = Contact::find($id);
+        return view('admin.contact.edit',compact('contact'));
 
     }
     public function updateContact(Request $request, $id){
-        
+        Contact::find($id)->update([
+            'address' =>$request->address,
+            'email' =>$request->email,
+            'phone' =>$request->phone,
+            'updated_at' =>Carbon::now(),
+        ]);
+        return Redirect()->back()->with('success','Contact Updated Successfully');
     }
     public function deleteContact($id){
         Contact::find($id)->delete();
