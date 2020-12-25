@@ -129,6 +129,10 @@ Route::post('/contact/form',[ContactController::class,'contactForm'])->name('con
 Route::get('/user/password',[ProfileController::class,'changePassword'])->name('change.password');
 Route::post('/user/password/update',[ProfileController::class,'updatePassword'])->name('update.password');
 
+Route::get('/user/profile',[ProfileController::class,'editProfile'])->name('profile.edit');
+Route::post('/user/profile/update',[ProfileController::class,'updateProfile'])->name('update.profile');
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent
     // $users = User::all();
