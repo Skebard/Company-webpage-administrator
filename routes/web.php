@@ -109,6 +109,10 @@ Route::get('/admin/contact',[ContactController::class,'adminContact'])->name('ad
 Route::get('/admin/add/contact',[ContactController::class,'addContact'])->name('add.contact');
 Route::post('/admin/store/contact',[ContactController::class,'storeContact'])->name('store.contact');
 
+Route::get('/admin/contact/edit/{id}',[ContactController::class,'editContact']);
+Route::get('/admin/contact/delete/{id}',[ContactController::class,'deleteContact']);
+Route::post('/admin/contact/update/{id}',[ContactController::class,'updateContact']);
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     //Eloquent

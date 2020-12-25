@@ -47,4 +47,17 @@ class ContactController extends Controller
 
         return Redirect()->route('admin.contact')->with('success','Contact Inserted Successfully');
     }
+
+
+    public function editContact($id){
+
+    }
+    public function updateContact(Request $request, $id){
+        
+    }
+    public function deleteContact($id){
+        Contact::find($id)->delete();
+        return Redirect()->back()->with('success','Contact Deleted Successfully');
+        
+    }
 }
